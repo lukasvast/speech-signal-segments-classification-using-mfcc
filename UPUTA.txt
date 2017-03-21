@@ -1,0 +1,40 @@
+-----------------------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\UPUTA ZA POKRETANJE PROGRAMA////////////////////////////////////
+
+***********************************************************************************************
+-zahtjevi: Python 2.7, Numpy, Scipy, Levenshtein
+-uz aplikaciju prilozeni su audio zapisi i transkripti za stvaranje modela (400 MODEL) 
+te zapisi i transkripti za izvrsavanje klasifikacije segmenata glasova (70 TEST)
+***********************************************************************************************
+
+0.KORAK----------------------------------------------------------------------------------------
+
+Stavljanje kratkih .wav datoteka u direktorij mfccfeatures/audio.
+Stavljanje odgovarajucih .lab datoteka u direktorij mfccfeatures/lab.
+
+1.KORAK----------------------------------------------------------------------------------------
+
+Pokretanje skripte mfccfeatures/extract.py
+PRIMJER: python extract.py
+
+2.KORAK (OPCIONALNO)---------------------------------------------------------------------------
+
+Pokretanje skripte speechextract/speech_recognition.py sa argumentom imena audio zapisa i 
+algoritma za racunanje distance (Mahalanobis ili Euklid).
+Audio .wav zapisi za klasifikaciju te odgovarajuce .lab datoteke se stavljaju u direktoriji 
+speechextract/.
+PRIMJER: python speech_recognition.py audio.wav M
+
+3.KORAK----------------------------------------------------------------------------------------
+
+Za klasifikaciju segmenata signala govora koristimo bash skriptu speech_classify.sh. Testni
+audio zapisi .wav i odgovarajuci .lab transkripti stavljaju se u direktorij speechextract/.
+Argument pogretanja skripte je M za Mahalanobis ili E za Euklid distancu.
+PRIMJER: ./speech_classify.sh M
+
+OUTPUT-----------------------------------------------------------------------------------------
+
+Vektori srednjih vrijednosti mfcc glasova u direktoriju /mfccfeatures/glasoviMean.
+Kovarijacijska matrica mfcc glasova u direktoriju /mfccfeatures/glasoviCov.
+Tekstualna .lab datoteka sa prepoznatim glasovima u direktoriju /speechextract/out.
+Informacije .txt o klasifikaciji segmenata signala govora u direkotoriju /speechextract/out.
